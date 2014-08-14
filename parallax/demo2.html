@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Parallax Demo with pure CSS in Frozen by Neversay</title>
+    <link rel="stylesheet" href="styles/parallax.css"/>
+    <style>
+
+      /* demo styles */
+      body, html {
+        overflow: hidden;
+      }
+      body {
+        font: 100% / 1.5 Arial;
+      }
+      * {
+        margin:0;
+        padding:0;
+      }
+      .parallax {
+        font-size: 200%;
+      }
+
+
+      .lyric {
+        font-size: 130%;
+        display: inline-block;
+        position: relative;
+        left: 10%;
+        bottom: 20%;
+      }
+      .card.two-faced .top .lyric {
+        bottom: 25%;
+        left: 10%;
+      }
+
+      .lyric.anna {
+        color: palevioletred;
+      }
+      .lyric.anna:before {
+        content: 'Anna：';
+      }
+
+      .lyric.elsa {
+        color: purple;
+      }
+      .lyric.elsa:before {
+        content: 'Elsa：';
+      }
+
+      .full-screen, .full-screen  img{
+        width: 100%;
+        height: 100%;        
+      }
+
+      .card {
+        width: 100%;
+        height: 50vh;
+        background-color: #FAFAFC;
+        margin-top:100vh;
+      }
+      .card img {
+        width: 40%;
+        height: 80%;
+        position: relative;
+        top: 10%;
+        left: 5%;
+      }
+
+      .card.two-faced .top, .card.two-faced .bottom {
+        width: 100%;
+        height: 50vh;
+      }
+      .card.two-faced .top img , .card.two-faced .bottom img {
+        width: 40%;
+        height: 50%;
+        position: relative;
+        left: 5%;
+      }
+      .card.two-faced .top img {
+        top: 2%;
+        width: 35%;
+      }
+      .card.two-faced .bottom img {
+        height: 80%;
+        top: 10%;
+      }
+
+
+      .card.two-faced .hide {
+        display: none;
+      }
+
+
+      .shot {
+        width: 100%;
+        height: 50vh;
+        background-color: #D4F1FA;
+        margin-top:150vh;
+        position: relative;
+      }
+      .shot img {
+        width: 40%;
+        height: 80%;
+        position: relative;
+        top: 10%;
+        left: 5%;
+      }
+      .shot img.right {
+        left: 20%;
+        right: 1%;
+      } 
+
+
+    </style>
+  </head>
+  <body>
+    <div class="parallax">
+      <div class="parallax__group">
+        <div class="parallax__layer parallax__layer--fore">
+          <div class="full-screen"><img src="images/Frozen_logo.png"/></div>
+        </div>
+
+        <div class="parallax__layer parallax__layer--base">
+          <div class="shot" style="margin-top:150vh;">
+            <img src="images/2.png"/>
+            <div class="anna lyric">看燈火模仿　墜落的星光</div>
+          </div>
+          <div class="shot">
+            <img src="images/4.png"/>
+            <div class="anna lyric">一個人完成</div>
+          </div>
+          <div class="shot">
+            <img src="images/6.png"/>
+            <span class="anna lyric">你總說　時間還很多</span>
+          </div>
+          <div class="shot">
+            <img src="images/8.png"/>
+            <span class="anna lyric">以前我不懂得</span>
+          </div>
+          <div class="shot">
+            <img src="images/10.png"/>
+            <span class="anna lyric">就有以後</span>
+          </div>
+          <div class="shot">
+            <img src="images/12.png"/>
+            <span class="anna lyric">它活在我身上所有角落</span>
+          </div>
+          <div class="shot">
+            <img src="images/14.png"/>
+            <span class="anna lyric">看你的信會痛</span>
+          </div>
+          <div class="shot">
+            <img src="images/16.png"/>
+            <span class="anna lyric">遺憾是會呼吸的痛</span>
+          </div>
+          <div class="shot">
+            <span class="anna lyric">後悔不貼心會痛<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;恨不懂你會痛</span>
+            <img src="images/18.png" class="right"/>
+          </div>
+          <div class="shot"></div>
+          <div class="shot"></div>
+          <div class="shot"></div>
+          <div class="shot"></div>
+          <div class="shot"></div>
+          <div class="shot"></div>
+          <div class="shot"></div>
+        </div>
+
+        <div class="parallax__layer parallax__layer--back">
+          <div class="card two-faced" style="margin-top:100vh;">
+            <div class="top">
+              <img src="images/1.png"/>
+              <div class="anna lyric">在東京鐵塔　第一次眺望</div>
+            </div>
+            <div class="bottom">
+              <img src="images/3.png"/>
+              <span class="anna lyric">我終於到達　但卻更悲傷</span>
+            </div>
+          </div>
+          <div class="card">
+            <img src="images/5.png"/>
+            <span class="anna lyric">我們的夢想</span>
+          </div>
+          <div class="card two-faced">
+            <div class="top">
+              <img src="images/7.png"/>
+              <span class="anna lyric">你可以等我</span>
+            </div>
+            <div class="bottom">
+              <img src="images/9.png"/>
+              <span class="anna lyric">未必明天</span>
+            </div>
+          </div>
+          <div class="card">
+            <img src="images/11.png"/>
+            <span class="anna lyric">想念是會呼吸的痛</span>
+          </div>
+          <div class="card two-faced">
+            <div class="top">
+              <img src="images/13.png"/>
+              <span class="anna lyric">哼你愛的歌會痛</span>
+            </div>
+            <div class="bottom">
+              <img src="images/15.png"/>
+              <span class="anna lyric">連沉默也痛</span>
+            </div>
+          </div>
+          <div class="card">
+            <img src="images/17.png"/>
+            <span class="anna lyric">它流在血液中來回滾動</span>
+          </div>
+          <div class="card two-faced">
+            <div class="top">
+              <span class="anna lyric" style="left: 30%;background: rgba(0,0,0,0.5);border-radius: 90px;padding: 0 2%;">想見不能見最痛</span>
+            </div>
+            <div class="bottom">
+            </div>
+          </div>
+          <div class="card"></div>
+          <div class="card two-faced">
+            <div class="top">
+            </div>
+            <div class="bottom">
+            </div>
+          </div>
+          <div class="card"></div>
+        </div>
+
+        <div class="parallax__layer parallax__layer--deep">
+          <div class="full-screen"><img src="images/Frozen-Movie-Summer_Arendelle-HD-Wallpaper1.jpg"/></div>
+          <div class="full-screen"><img src="images/Frozen-Movie-Ice-Castle-HD-Wallpaper1.jpg"/></div>
+          <div class="full-screen"><img src="images/YoungAE.jpg"/></div>
+          <div class="full-screen"><img src="images/Anna-Door.jpg"/></div>
+          <div class="full-screen"><img src="images/A-Sister-More-Like-Me-book-frozen-35706725-1212-779.jpg"/></div>
+          <div class="full-screen"><img src="images/Frozen-funeral.jpg"/></div>
+          <div class="full-screen"><img src="images/Elsa-Grief.png"/></div>
+          <div class="full-screen"><img src="images/Arendelle_in_ice_artwork.jpg"/></div>
+        </div>
+
+      </div>
+
+
+    </div>
+    <script type="text/javascript">
+      var body = document.querySelector('.parallax'), twoFaceList = document.querySelectorAll('.card.two-faced'), counter = 0;
+      body.addEventListener('scroll', function (e){
+        var progress = Number.parseInt(body.scrollTop * 100 / document.body.clientHeight);
+        counter++;
+        if (0 !== counter % 20 ) {return;}
+        // Gate 100 700 1300 = 100 + n * 600
+        var gate = Math.floor((progress + 500)/600), i = 0;
+        // Turn to bottom
+        for (;i < gate;i++) {
+          if (twoFaceList[i] && 'top' === twoFaceList[i].querySelector('.top').className) {
+            twoFaceList[i].querySelector('.top').className = 'top hide';
+            twoFaceList[i].querySelector('.bottom').className = 'bottom';
+          }
+        }
+        // Keep to top
+        for (;i < twoFaceList.length;i++) {
+          if (twoFaceList[i] && 'bottom' === twoFaceList[i].querySelector('.bottom').className) {
+            twoFaceList[i].querySelector('.top').className = 'top';
+            twoFaceList[i].querySelector('.bottom').className = 'bottom hide';
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
