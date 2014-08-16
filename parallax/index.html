@@ -128,7 +128,10 @@
       .card.two-faced .bottom img {
         top: 10%;
       }
-
+      .card.two-faced .top.still.hide {
+        display:block;
+        position: absolute;
+      }
 
       .card.two-faced .hide {
         display: none;
@@ -297,8 +300,7 @@
             <img class="image38" src="images/38.jpg"/>
             <span class="elsa lyric">恨不懂你會痛</span>
           </div>
-          <div class="shot o30">
-            <div class="background-image-blue"></div>
+          <div class="shot o30" style="background:black;">
             <img class="image39 center" src="images/39.jpg"/>
           </div>
           <div class="shot o0">
@@ -308,12 +310,9 @@
             <img class="image41" src="images/41.jpg"/>
             <span class="elsa lyric">我的微笑都假了　靈魂像飄浮著</span>
           </div>
-          <div class="shot o0">
-          </div>
-          <div class="shot">
+          <div class="shot" style="background-color: rgba(255,255,255,0.3);">
             <div class="background-image-blue"></div>
-            <img class="image" src="images/.jpg"/>
-            <span class="elsa lyric"></span>
+            <span class="elsa lyric posA t50 l35">我發誓不讓你等候</span>
           </div>
           <div class="shot">
             <div class="background-image-blue"></div>
@@ -372,7 +371,7 @@
             <span class="anna lyric">它流在血液中來回滾動</span>
           </div>
           <div class="card two-faced" style="box-shadow:0 -15px 20px rgba(0,0,0,0.30);background:linear-gradient(to bottom,rgba(0,0,0,0.3) 3%, rgba(0,0,0,0.5) 10%, rgba(0,0,0,0.9) 18%, black 40%, rgba(0,0,0,0.8) 90%);">
-            <div class="top" style="display:block!important;">
+            <div class="top still">
               <span class="anna lyric l40 b40 black">想見不能見最痛</span>
             </div>
             <div class="bottom">
@@ -429,7 +428,7 @@
           </div>
           <div class="card two-faced">
             <div class="background-image-white"></div>
-            <div class="top" style="display:block!important;">
+            <div class="top still">
               <img class="image37 center t10" src="images/37.jpg"/>
               <span class="elsa lyric l35 b40 white">遺憾是會呼吸的痛</span>
             </div>
@@ -437,12 +436,12 @@
             </div>
           </div>
           <div class="card">
-            <div class="background-image-white" style="display:block!important;"></div>
+            <div class="background-image-white"></div>
             <span class="elsa lyric l35 b40 white">它流在血液中來回滾動</span>
           </div>
           <div class="card two-faced">
             <div class="background-image-white"></div>
-            <div class="top" style="display:block!important;">
+            <div class="top still">
               <span class="elsa lyric l35 b40 white">後悔不貼心會痛</span>
             </div>
             <div class="bottom">
@@ -456,10 +455,12 @@
           </div>
           <div class="card two-faced">
             <div class="background-image-white"></div>
-            <div class="top">
+            <div class="top still">
               <span class="elsa lyric l35 b40 white">多愛你就會抱你多緊的</span>
             </div>
             <div class="bottom">
+              <img class="image42" src="images/42.jpg"/>
+              <span class="elsa lyric">你在就好了</span>
             </div>
           </div>
           <div class="card">
@@ -487,6 +488,7 @@
           <div class="full-screen"><img src="images/Elsa_Angry_4.jpg"/></div>
           <div class="full-screen"><img src="images/Anna_Near_Death.jpg"/></div>
           <div class="full-screen"><img src="images/Annas_Fate.jpg"/></div>
+          <div class="full-screen"><img src="images/Elsa_Anna_Hug.jpg"/></div>
           <div class="full-screen"><img src="images/Arendelle_in_ice_artwork.jpg"/></div>
         </div>
 
@@ -503,14 +505,14 @@
         var i = 0;
         // Turn to bottom
         for (;i < gate;i++) {
-          if (twoFaceList[i] && 'top' === twoFaceList[i].querySelector('.top').className) {
+          if (twoFaceList[i] && null === twoFaceList[i].querySelector('.top').className.match('hide')) {
             twoFaceList[i].querySelector('.top').className += ' hide';
             twoFaceList[i].querySelector('.bottom').className = twoFaceList[i].querySelector('.bottom').className.replace(' hide', '');
           }
         }
         // Keep to top
         for (;i < twoFaceList.length;i++) {
-          if (twoFaceList[i] && 'bottom' === twoFaceList[i].querySelector('.bottom').className) {
+          if (twoFaceList[i] && null === twoFaceList[i].querySelector('.bottom').className.match('hide')) {
             twoFaceList[i].querySelector('.top').className = twoFaceList[i].querySelector('.top').className.replace(' hide', '');
             twoFaceList[i].querySelector('.bottom').className += ' hide';
           }
