@@ -314,10 +314,12 @@
             <div class="background-image-blue"></div>
             <span class="elsa lyric posA t50 l35">我發誓不讓你等候</span>
           </div>
-          <div class="shot">
+          <div class="shot" style="background-color: rgba(255,255,255,0.3);">
             <div class="background-image-blue"></div>
-            <img class="image" src="images/.jpg"/>
-            <span class="elsa lyric"></span>
+            <img class="image44 posA la r0 t50 o60" style="border-radius:50px" src="images/44.jpg"/>
+            <img class="image45" src="images/45.jpg"/>
+            <img class="image46 posA la r10 tN50 o60" style="border-radius:50px" src="images/46.jpg"/>
+            <span class="elsa lyric white">我越來越像貝殼</span>
           </div>
         </div>
 
@@ -445,7 +447,7 @@
               <span class="elsa lyric l35 b40 white">後悔不貼心會痛</span>
             </div>
             <div class="bottom">
-              <span class="elsa lyric l35 t40 white">想見不能見最痛</span>
+              <span class="elsa lyric l35 t120 white">想見不能見最痛</span>
             </div>
           </div>
           <div class="card">
@@ -465,6 +467,17 @@
           </div>
           <div class="card">
             <div class="background-image-white"></div>
+            <span class="elsa lyric t50">陪你做想做的無論什麼</span>
+            <img class="image43 right" src="images/43.jpg"/>
+          </div>
+          <div class="card two-faced">
+            <div class="background-image-white"></div>
+            <div class="top still">
+              <span class="elsa lyric l35 b40 white">怕心被人觸碰</span>
+            </div>
+            <div class="bottom still">
+              <span class="elsa lyric l35 t120 white">你回來那就好了</span>
+            </div>
           </div>
         </div>
 
@@ -489,7 +502,11 @@
           <div class="full-screen"><img src="images/Anna_Near_Death.jpg"/></div>
           <div class="full-screen"><img src="images/Annas_Fate.jpg"/></div>
           <div class="full-screen"><img src="images/Elsa_Anna_Hug.jpg"/></div>
-          <div class="full-screen"><img src="images/Arendelle_in_ice_artwork.jpg"/></div>
+          <div class="full-screen">
+            <img class="image48 posA" src="images/47.jpg"/>
+            <img class="image49 posA" style="opacity:0" src="images/Elsa_Anna_Skate_2.jpg"/>
+          </div>
+          <div class="full-screen"><img src="images/Frozen_Screen_Final.jpg"/></div>
         </div>
 
       </div>
@@ -520,13 +537,17 @@
       },
       fadeInOutHandler = function (progress) {
         // image 17 18
-        fadeInOutImage(progress, 1500, 1600, 17);
-        fadeInOutImage(progress, 1650, 1700, 18);
+        opacityImage(progress, 1500, 1600, 17);
+        opacityImage(progress, 1650, 1700, 18);
         for (var i = 0; i < 10; i++) {
-          fadeInOutImage(progress, 4000 + 60*i, 4200 + 60*i, 1000 + i, memoryEffect);
+          opacityImage(progress, 4000 + 60*i, 4200 + 60*i, 1000 + i, memoryEffect);
+        }
+        if (0 == progress % 5) {
+          opacityImage(progress, 6000, 6100, 48, fadeOutEffect);
+          opacityImage(progress, 5950, 6100, 49);
         }
       },
-      fadeInOutImage = function (progress, start, end, imgNum, customizedFunc) {
+      opacityImage = function (progress, start, end, imgNum, customizedFunc) {
         if (progress > start && progress < end) {
           var img = document.querySelector('.image'+imgNum);
           if (img && img.style) {
@@ -537,6 +558,9 @@
       memoryEffect = function (progress, start, end) {
         // Range : 0.3 ~ 0.6
         return 0.3 + ((Math.sin(Math.PI * progress/50)+1) * 0.15);
+      },
+      fadeOutEffect = function (progress, start, end) {
+        return 1 - ((progress - start)/(end - start));
       };
 
       body.addEventListener('scroll', function (e){
