@@ -184,7 +184,15 @@
     <div class="parallax">
       <div class="parallax__group">
         <div class="parallax__layer parallax__layer--fore">
-          <div class="full-screen"><img src="images/Frozen_Logo.jpg"/></div>
+          <div class="full-screen">
+            <img src="images/Frozen_Logo.jpg"/>
+            <div class="posA b5 r5" style="color:#999999;font-family:標楷體">
+              <div style="color:#cccccc">會呼吸的痛</div>
+              <div style="color:#999999">唱：梁靜茹</div>
+              <div style="color:#707070">詞：姚若龍</div>
+              <div style="color:#5f5f5f">曲：宇恆</div>
+            </div>
+          </div>
           <div class="memory l5" style="margin-top:5750vh;"><img class="image1000" src="images/memory1.jpg"/></div>
           <div class="memory l45"><img class="image1001" src="images/memory2.jpg"/></div>
           <div class="memory l15"><img class="image1002" src="images/memory3.jpg"/></div>
@@ -421,10 +429,10 @@
           </div>
           <div class="card two-faced">
             <div class="background-image-white"></div>
-            <div class="top">
+            <div class="top still">
               <span class="elsa lyric l35 b40 white">它活在我身上所有角落</span>
             </div>
-            <div class="bottom">
+            <div class="bottom posA">
               <img class="image35" src="images/35.jpg"/>
               <span class="elsa lyric">看你的信會痛</span>
             </div>
@@ -511,12 +519,12 @@
           <div class="full-screen"><img src="images/Annas_Fate.jpg"/></div>
           <div class="full-screen"><img src="images/Elsa_Anna_Hug.jpg"/></div>
           <div class="full-screen">
+            <img class="image49 posA" src="images/Elsa_Anna_Skate_2.jpg"/>
             <img class="image48 posA" src="images/47.jpg"/>
-            <img class="image49 posA" style="opacity:0" src="images/Elsa_Anna_Skate_2.jpg"/>
           </div>
           <div class="full-screen"><img src="images/Frozen_Screen_Final.jpg"/></div>
           <div class="full-screen"><img src="images/Castle.jpg"/></div>
-          <div class="w100 h50"><div class="posR w100 h100 t45 l45">The End</div></div>
+          <div class="w100 h50" style="font-family:cursive;font-size: 2em;font-weight:bold"><div class="posR w100 h100 t40 l45">The End</div></div>
         </div>
 
       </div>
@@ -524,6 +532,8 @@
 
     </div>
     <script type="text/javascript">
+      window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+        window.webkitRequestAnimationFrame || window.oRequestAnimationFrame;
       var body = document.querySelector('.parallax'), twoFaceList = body.querySelectorAll('.card.two-faced'), prevProgress = -1;
       var getProgress = function(){
         return parseInt(body.scrollTop * 100 / document.body.clientHeight);
@@ -552,9 +562,8 @@
         for (var i = 0; i < 10; i++) {
           opacityImage(progress, 4000 + 60*i, 4200 + 60*i, 1000 + i, memoryEffect);
         }
-        if (0 == progress % 5) {
+        if (0 === progress%2) {
           opacityImage(progress, 6000, 6100, 48, fadeOutEffect);
-          opacityImage(progress, 5950, 6100, 49);
         }
       },
       opacityImage = function (progress, start, end, imgNum, customizedFunc) {
@@ -566,18 +575,27 @@
         }
       },
       memoryEffect = function (progress, start, end) {
-        // Range : 0.3 ~ 0.6
-        return 0.3 + ((Math.sin(Math.PI * progress/50)+1) * 0.15);
+        // Range : 0.2 ~ 0.7
+        return 0.2 + ((Math.sin(Math.PI * progress/50)+1) * 0.25);
       },
       fadeOutEffect = function (progress, start, end) {
         return 1 - ((progress - start)/(end - start));
       };
 
       body.addEventListener('scroll', function (e){
-        var progress = getProgress();
-        // Gate 110 710 1310 = 110 + n * 600
-        var gate = Math.floor((progress + 490)/600);
-        fadeInOutHandler(progress);
+        var progress = getProgress(),
+          // Gate 110 710 1310 = 110 + n * 600
+          gate = Math.floor((progress + 490)/600),
+          prevAnimationTime = null;
+        if (requestAnimationFrame){
+          requestAnimationFrame(function (time){
+            if (prevAnimationTime === time){ return; }
+            prevAnimationTime = time;
+            fadeInOutHandler(progress);
+          });
+          }else {
+            fadeInOutHandler(progress);
+          }
         if (prevProgress === progress){ return; }
         prevProgress = progress;
         twoFaceHandler(gate);
