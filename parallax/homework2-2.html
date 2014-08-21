@@ -161,7 +161,7 @@
     <script>
       window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
         window.webkitRequestAnimationFrame || window.oRequestAnimationFrame;
-      var body = document.querySelector('.parallax'), prevScrollTop = 0, scrollTop = 0, prevAnimationTime = 0;
+      var body = document.querySelector('.parallax'), scrollTop = 0, prevAnimationTime = 0;
       var lv0 = body.querySelector('.parallax__layer--deep'),
         lv1 = body.querySelector('.parallax__layer--back'),
         lv2 = body.querySelector('.parallax__layer--base')
@@ -172,11 +172,9 @@
           lv3.style.top=(newScrollTop*-2) + 'px';
         },
         tickScroll = function (time) {
-          if (prevAnimationTime === time || prevScrollTop === scrollTop || 1 === Math.abs(prevScrollTop - scrollTop)){ return; }
+          if (prevAnimationTime === time){ return; }
           prevAnimationTime = time;
-          prevScrollTop = (scrollTop + prevScrollTop )>>1;
-          doScroll(prevScrollTop);
-          requestAnimationFrame(tickScroll);
+          doScroll(scrollTop);
         };
       body.addEventListener('scroll', function (e){
         scrollTop = body.scrollTop;
