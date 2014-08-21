@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <meta name="keywords" lang="zh-Hant-TW" content="Parallax design, 視差滾動設計" />
-    <meta property="og:description" content="Parallax練習 1"/>
+    <meta property="og:description" content="Parallax練習 2"/>
     <meta property="og:title" content="視差滾動設計(Parallax design)練習"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="http://neversay.github.io/parallax/homework1.html"/>
+    <meta property="og:url" content="http://neversay.github.io/parallax/homework2.html"/>
     <title>Parallax Design practice</title>
-    <link rel="stylesheet" href="styles/parallax.css"/>
+    <link rel="stylesheet" href="styles/parallax2.css"/>
     <link rel="stylesheet" href="styles/simple.css"/>
     <style>
 
@@ -38,7 +38,7 @@
       }
       .full-screen, .full-screen  img{
         width: 100%;
-        height: 100%;
+        height: 100vh;
       }
 
       .fore {
@@ -158,5 +158,20 @@
         </div>
       </div>
     </div>
+    <script>
+      window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+        window.webkitRequestAnimationFrame || window.oRequestAnimationFrame;
+      var body = document.querySelector('.parallax'), scrollTop = 0;
+      var lv0 = body.querySelector('.parallax__layer--deep'),
+        lv1 = body.querySelector('.parallax__layer--back'),
+        lv2 = body.querySelector('.parallax__layer--base')
+        lv3 = body.querySelector('.parallax__layer--fore');
+      body.addEventListener('scroll', function (e){
+        scrollTop = body.scrollTop;
+        lv0.style.top=parseInt(scrollTop * 0.333) + 'px';
+        lv2.style.top=(scrollTop*-1) + 'px';
+        lv3.style.top=(scrollTop*-2) + 'px';
+      });
+    </script>
   </body>
 </html>
