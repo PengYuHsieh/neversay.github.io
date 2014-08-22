@@ -167,9 +167,9 @@
         lv2 = body.querySelector('.parallax__layer--base')
         lv3 = body.querySelector('.parallax__layer--fore'),
         doScroll = function (newScrollTop){
-          lv0.style.top=parseInt(newScrollTop * 0.333) + 'px';
-          lv2.style.top=(newScrollTop*-1) + 'px';
-          lv3.style.top=(newScrollTop*-2) + 'px';
+          lv1.style.top=parseInt(newScrollTop * -0.5) + 'px';
+          lv2.style.top=(newScrollTop*-2) + 'px';
+          lv3.style.top=(newScrollTop*-3.5) + 'px';
         },
         tickScroll = function (time) {
           if (prevAnimationTime === time){ return; }
