@@ -194,7 +194,7 @@
       window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
         window.webkitRequestAnimationFrame || window.oRequestAnimationFrame;
       var body = document.querySelector('.parallax'), twoFaceList = body.querySelectorAll('.card.two-faced'),
-        scrollTop = 0, prevProgress = 0, prevAnimationTime = 0;
+        scrollTop = 0, prevThreshold = 0, prevAnimationTime = 0;
       var lv0 = body.querySelector('.parallax__layer--deep'),
         lv1 = body.querySelector('.parallax__layer--back'),
         lv2 = body.querySelector('.parallax__layer--base')
@@ -212,10 +212,10 @@
         getProgress = function(){
           return parseInt(body.scrollTop * 100 / document.body.clientHeight);
         },
-        twoFaceHandler = function (gate) {
+        twoFaceHandler = function (threshold) {
           var i = 0;
           // Turn to bottom
-          for (;i < gate;i++) {
+          for (;i < threshold;i++) {
             if (twoFaceList[i] && null === twoFaceList[i].querySelector('.top').className.match('hide')) {
               twoFaceList[i].querySelector('.top').className += ' hide';
               twoFaceList[i].querySelector('.bottom').className = twoFaceList[i].querySelector('.bottom').className.replace(' hide', '');
@@ -233,15 +233,15 @@
         scrollTop = body.scrollTop;
         var progress = getProgress(),
           // Gate 33 233 433 = 33 + n * 200
-          gate = Math.floor((progress + 167)/200);
+          threshold = Math.floor((progress + 167)/200);
         if (requestAnimationFrame){
           requestAnimationFrame(tickScroll);
         } else {
           doScroll(scrollTop);
         }
-        if (prevProgress === progress){ return; }
-        prevProgress = progress;
-        twoFaceHandler(gate);
+        if (prevThreshold === threshold){ return; }
+        prevThreshold = threshold;
+        twoFaceHandler(threshold);
       });
     </script>
   </body>
