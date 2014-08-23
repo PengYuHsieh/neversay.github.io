@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="keywords" lang="zh-Hant-TW" content="Parallax design, 視差滾動設計" />
+    <meta property="og:description" content="Parallax練習 4"/>
+    <meta property="og:title" content="視差滾動設計(Parallax design)練習"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://neversay.github.io/parallax/homework4.html"/>
+    <title>Parallax Design practice</title>
+    <link rel="stylesheet" href="styles/parallax2.css"/>
+    <link rel="stylesheet" href="styles/simple.css"/>
+    <style>
+
+      /* demo styles */
+      body, html {
+        overflow: hidden;
+      }
+      body {
+        font: 100% / 1.5 Arial;
+      }
+      * {
+        margin:0;
+        padding:0;
+      }
+      .parallax {
+        font-size: 200%;
+      }
+
+
+      .title {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+      .full-screen, .full-screen  img{
+        width: 100%;
+        height: 100vh;
+      }
+
+      .fore {
+        width:50%;
+        height:25vh;
+        background-color: blue;
+        margin-top:100vh;
+        position:relative;
+        opacity: 0.9;
+      }
+      .fore.right {
+        left:50%;
+      }
+      .fore.center {
+        left:25%;
+      }
+
+      .card {
+        width: 100%;
+        height: 50vh;
+        background-color: #FAFAFC;
+        margin-top:100vh;
+        position: relative;
+      }
+
+      .shot {
+        width: 100%;
+        height: 50vh;
+        background-color: green;
+        margin-top:150vh;
+        position: relative;
+        opacity: 0.8;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="parallax">
+      <div class="parallax__group">
+        <div class="parallax__layer parallax__layer--fore">
+          <div class="full-screen" style="background-color:cyan;"><div class="title">FIRST PAGE</div></div>
+          <div class="fore fade1">
+            <div class="title">FIRST FORE</div>
+          </div>
+          <div class="fore right">
+            <div class="title">FORE</div>
+          </div>
+          <div class="fore center">
+            <div class="title">FORE</div>
+          </div>
+          <div class="fore center">
+            <div class="title">FORE</div>
+          </div>
+          <div class="fore right cycle1">
+            <div class="title">FORE</div>
+          </div>
+          <div class="fore center">
+            <div class="title">FORE</div>
+          </div>
+          <div class="fore">
+            <div class="title">FORE</div>
+          </div>
+          <div class="fore right">
+            <div class="title">FORE</div>
+          </div>
+        </div>
+
+        <div class="parallax__layer parallax__layer--base">
+          <div class="shot" style="margin-top:150vh;">
+            <div class="title">FIRST BASE</div>
+          </div>
+          <div class="shot fade2">
+            <div class="title">BASE</div>
+          </div>
+          <div class="shot cycle2">
+            <div class="title">BASE</div>
+          </div>
+          <div class="shot">
+            <div class="title">BASE</div>
+          </div>
+          <div class="shot">
+            <div class="title">BASE</div>
+          </div>
+          <div class="shot">
+            <div class="title">BASE</div>
+          </div>
+          <div class="shot">
+            <div class="title">BASE</div>
+          </div>
+        </div>
+
+        <div class="parallax__layer parallax__layer--back">
+          <div class="card" style="margin-top:100vh;">
+            <div class="title">BACK</div>
+          </div>
+          <div class="card">
+            <div class="title">BACK</div>
+          </div>
+          <div class="card fade3">
+            <div class="title">BACK</div>
+          </div>
+          <div class="card">
+            <div class="title">BACK</div>
+          </div>
+          <div class="card" style="background: rgba(0,0,0,0.6);">
+            <div class="title">BACK</div>
+          </div>
+          <div class="card">
+            <div class="title">BACK</div>
+          </div>
+        </div>
+
+        <div class="parallax__layer parallax__layer--deep">
+          <div class="full-screen"><img src="images/Arendelle_in_ice_artwork.jpg"/></div>
+          <div class="full-screen"><img src="images/Frozen-Movie-Ice-Castle-HD-Wallpaper1.jpg"/></div>
+          <div class="full-screen"><img src="images/Arendelle_in_ice_artwork.jpg"/></div>
+          <div class="full-screen"><img src="images/Frozen-Movie-Ice-Castle-HD-Wallpaper1.jpg"/></div>
+          <div class="full-screen"><img src="images/Arendelle_in_ice_artwork.jpg"/></div>
+          <div class="full-screen"><img src="images/Frozen-Movie-Ice-Castle-HD-Wallpaper1.jpg"/></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var body = document.querySelector('.parallax'),
+        scrollTop = 0, prevThreshold = 0;
+      var lv0 = body.querySelector('.parallax__layer--deep'),
+        lv1 = body.querySelector('.parallax__layer--back'),
+        lv2 = body.querySelector('.parallax__layer--base')
+        lv3 = body.querySelector('.parallax__layer--fore'),
+        doScroll = function (newScrollTop){
+          lv1.style.top=parseInt(newScrollTop * -0.5) + 'px';
+          lv2.style.top=(newScrollTop*-2) + 'px';
+          lv3.style.top=(newScrollTop*-3.5) + 'px';
+        },
+        getProgress = function(){
+          return parseInt(body.scrollTop * 100 / document.body.clientHeight);
+        },
+        fadeInOutHandler = function (progress) {
+          opacityImage(progress, 20, 44, '.fade1');
+          opacityImage(progress, 83, 117, '.fade2');
+          opacityImage(progress, 200, 300, '.fade3', fadeOutEffect);
+          opacityImage(progress, 130, 170, '.cycle1', memoryEffect);
+          opacityImage(progress, 150, 200, '.cycle2', memoryEffect);
+        },
+        opacityImage = function (progress, start, end, imgSelector, customizedFunc) {
+          if (progress > start && progress < end) {
+            var img = document.querySelector(imgSelector);
+            if (img && img.style) {
+              img.style.opacity = (customizedFunc && customizedFunc(progress, start, end)) || ((progress - start)/(end - start));
+            }
+          }
+        },
+        memoryEffect = function (progress, start, end) {
+          // Range : 0.1 ~ 1
+          return 0.1 + ((Math.sin(Math.PI * progress/10)+1) * 0.45);
+        },
+        fadeOutEffect = function (progress, start, end) {
+          return 1 - ((progress - start)/(end - start));
+        };
+      body.addEventListener('scroll', function (e){
+        scrollTop = body.scrollTop;
+        var progress = getProgress(),
+          // Gate 33 233 433 = 33 + n * 200
+          threshold = Math.floor((progress + 167)/200);
+        doScroll(scrollTop);
+        fadeInOutHandler(progress);
+        if (prevThreshold === threshold){ return; }
+        prevThreshold = threshold;
+      });
+    </script>
+  </body>
+</html>
