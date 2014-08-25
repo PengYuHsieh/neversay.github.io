@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="keywords" lang="zh-Hant-TW" content="Parallax design, 視差滾動設計" />
+    <meta property="og:description" content="Parallax練習 4"/>
+    <meta property="og:title" content="視差滾動設計(Parallax design)練習"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://neversay.github.io/parallax/homework4.html"/>
+    <title>Parallax Design practice</title>
+    <link rel="stylesheet" href="styles/parallax2.css"/>
+    <link rel="stylesheet" href="styles/simple.css"/>
+    <style>
+
+      /* demo styles */
+      body, html {
+        overflow: hidden;
+      }
+      body {
+        font: 100% / 1.5 Arial;
+      }
+      * {
+        margin:0;
+        padding:0;
+      }
+      .parallax {
+        font-size: 200%;
+      }
+
+
+      .title {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+      .full-screen, .full-screen  img{
+        width: 100%;
+        height: 100vh;
+      }
+
+      .fore {
+        width:50%;
+        height:25vh;
+        background-color: blue;
+        margin-top:100vh;
+        position:relative;
+        opacity: 0.9;
+      }
+      .fore.right {
+        left:50%;
+      }
+      .fore.center {
+        left:25%;
+      }
+
+      .card {
+        width: 100%;
+        height: 50vh;
+        background-color: #FAFAFC;
+        margin-top:100vh;
+        position: relative;
+      }
+
+      .shot {
+        width: 100%;
+        height: 50vh;
+        background-color: green;
+        margin-top:150vh;
+        position: relative;
+        opacity: 0.8;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="parallax">
+      <div class="parallax__group">
+        <div class="parallax__layer parallax__layer--fore">
+          <div class="full-screen" style="background-color:cyan;"><div class="title">FIRST PAGE</div></div>
+          <div class="fore fade1">
+            <div class="title">FIRST FORE</div>
+          </div>
+          <div class="fore right">
+            <div class="title">FORE</div>
+          </div>
+          <div class="fore center">
+            <div class="title">FORE</div>
+          </div>
+          <div class="fore center">
+            <div class="title">FORE</div>
+          </div>
+          <div class="fore right cycle1">
+            <div class="title">FORE</div>
+          </div>
+          <div class="fore center">
+            <div class="title">FORE</div>
+          </div>
+          <div class="fore">
+            <div class="title">FORE</div>
+          </div>
+          <div class="fore right">
+            <div class="title">FORE</div>
+          </div>
+        </div>
+
+        <div class="parallax__layer parallax__layer--base">
+          <div class="shot" style="margin-top:150vh;">
+            <div class="title">FIRST BASE</div>
+          </div>
+          <div class="shot fade2">
+            <div class="title">BASE</div>
+          </div>
+          <div class="shot cycle2">
+            <div class="title">BASE</div>
+          </div>
+          <div class="shot">
+            <div class="title">BASE</div>
+          </div>
+          <div class="shot">
+            <div class="title">BASE</div>
+          </div>
+          <div class="shot">
+            <div class="title">BASE</div>
+          </div>
+          <div class="shot">
+            <div class="title">BASE</div>
+          </div>
+        </div>
+
+        <div class="parallax__layer parallax__layer--back">
+          <div class="card" style="margin-top:100vh;">
+            <div class="title">BACK</div>
+          </div>
+          <div class="card">
+            <div class="title">BACK</div>
+          </div>
+          <div class="card fade3">
+            <div class="title">BACK</div>
+          </div>
+          <div class="card">
+            <div class="title">BACK</div>
+          </div>
+          <div class="card" style="background: rgba(0,0,0,0.6);">
+            <div class="title">BACK</div>
+          </div>
+          <div class="card">
+            <div class="title">BACK</div>
+          </div>
+        </div>
+
+        <div class="parallax__layer parallax__layer--deep">
+          <div class="full-screen"><img src="images/Frozen-Movie-Summer_Arendelle-HD-Wallpaper1.jpg"/></div>
+          <div class="full-screen"><img src="images/Frozen-Movie-Ice-Castle-HD-Wallpaper1.jpg"/></div>
+          <div class="full-screen"><img src="images/ajax-loader.gif" class="lazy" lazy-src="images/YoungAE.jpg"/></div>
+          <div class="full-screen"><img src="images/ajax-loader.gif" class="lazy" lazy-src="images/Anna-Door.jpg"/></div>
+          <div class="full-screen"><img src="images/ajax-loader.gif" class="lazy" lazy-src="images/A-Sister-More-Like-Me-book-frozen-35706725-1212-779.jpg"/></div>
+          <div class="full-screen"><img src="images/ajax-loader.gif" class="lazy" lazy-src="images/Frozen-funeral.jpg"/></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var body = document.querySelector('.parallax'), lazyImages = document.querySelectorAll('img.lazy');
+        progress = 0;
+      var lv0 = body.querySelector('.parallax__layer--deep'),
+        lv1 = body.querySelector('.parallax__layer--back'),
+        lv2 = body.querySelector('.parallax__layer--base')
+        lv3 = body.querySelector('.parallax__layer--fore'),
+        doScroll = function (newScrollTop) {
+          lv1.style.top=parseInt(newScrollTop * -0.5) + 'px';
+          lv2.style.top=(newScrollTop*-2) + 'px';
+          lv3.style.top=(newScrollTop*-3.5) + 'px';
+        },
+        getProgress = function() {
+          return parseInt(body.scrollTop * 100 / document.body.clientHeight);
+        },
+        loadImages = function() {
+          var image, src, newImage;
+          if (lazyImages.length === 0) { return; }
+          for (var i = 0; i < lazyImages.length ; i++) {
+            image = lazyImages[i];
+            newImage = new Image();
+            src = image.getAttribute('lazy-src');
+            newImage.onload = (function () {
+              var theSrc = src, theImage = image;
+              return function (){
+                if (!! theImage.parent) {
+                  theImage.parent.replaceChild(newImage, theImage);
+                } else {
+                  theImage.src = theSrc;
+                }
+              }
+            })();
+            newImage.src = src;
+          }
+        lazyImages = [];
+        };
+      body.addEventListener('scroll', function (e) {
+        progress = getProgress();
+        if (progress >= 60 && lazyImages.length > 0) {
+          loadImages();
+        }
+        doScroll(body.scrollTop);
+      });
+    </script>
+  </body>
+</html>
