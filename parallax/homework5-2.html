@@ -176,7 +176,8 @@
           return parseInt(body.scrollTop * 100 / document.body.clientHeight);
         },
         initLazyImages = function () {
-          var temp = [], lazyImages = document.querySelectorAll('img.lazy');
+          var temp = [];
+          lazyImages = document.querySelectorAll('img.lazy');
           for(var i = 0; i < lazyImages.length; i++) {
             temp.push(lazyImages[i]);
           }
