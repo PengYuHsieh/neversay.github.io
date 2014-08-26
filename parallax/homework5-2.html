@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <meta name="keywords" lang="zh-Hant-TW" content="Parallax design, 視差滾動設計" />
-    <meta property="og:description" content="Parallax練習 5"/>
+    <meta property="og:description" content="Parallax練習 5-2"/>
     <meta property="og:title" content="視差滾動設計(Parallax design)練習"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="http://neversay.github.io/parallax/homework5.html"/>
+    <meta property="og:url" content="http://neversay.github.io/parallax/homework5-2.html"/>
     <title>Parallax Design practice</title>
     <link rel="stylesheet" href="styles/parallax2.css"/>
     <link rel="stylesheet" href="styles/simple.css"/>
@@ -162,8 +162,7 @@
       </div>
     </div>
     <script>
-      var body = document.querySelector('.parallax'), lazyImages = document.querySelectorAll('img.lazy');
-        progress = 0;
+      var body = document.querySelector('.parallax'), lazyImages, progress = 0;
       var lv0 = body.querySelector('.parallax__layer--deep'),
         lv1 = body.querySelector('.parallax__layer--back'),
         lv2 = body.querySelector('.parallax__layer--base')
@@ -176,33 +175,45 @@
         getProgress = function() {
           return parseInt(body.scrollTop * 100 / document.body.clientHeight);
         },
-        loadImages = function() {
-          var image, src, newImage;
-          if (lazyImages.length === 0) { return; }
-          for (var i = 0; i < lazyImages.length ; i++) {
-            image = lazyImages[i];
-            newImage = new Image();
-            src = image.getAttribute('lazy-src');
-            newImage.onload = (function () {
-              var theSrc = src, theImage = image;
-              return function (){
-                if (!! theImage.parent) {
-                  theImage.parent.replaceChild(newImage, theImage);
-                } else {
-                  theImage.src = theSrc;
-                }
-              }
-            })();
-            newImage.src = src;
+        initLazyImages = function () {
+          var temp = [], lazyImages = document.querySelectorAll('img.lazy');
+          for(var i = 0; i < lazyImages.length; i++) {
+            temp.push(lazyImages[i]);
           }
-        lazyImages = [];
+          lazyImages = temp;
+        },
+        canLoadImage = function (elem) {
+          var pos = elem.getBoundingClientRect();
+          return pos.top >= 0 && pos.left >= 0 && pos.top <= (window.innerHeight || document.documentElement.clientHeight)
+        },
+        loadImage = function (image) {
+          var img = new Image(), src = image.getAttribute('lazy-src');
+          img.onload = (function() {
+            var newImage = img, newSrc = src;
+            return function() {
+              if (!! image.parent) {
+                image.parent.replaceChild(newImage, image)
+              } else {
+                image.src = newSrc;
+              }
+            };
+          })();
+          img.src = src;
+        },
+        handleLazyImages = function () {
+          for (var i = 0; i < lazyImages.length; i++) {
+            var image = lazyImages[i];
+            if (canLoadImage(image)) {
+              loadImage(lazyImages.splice(i,1)[0]);
+              i--;
+            }
+          }
         };
+
+      initLazyImages();
       body.addEventListener('scroll', function (e) {
-        progress = getProgress();
-        if (progress >= 60 && lazyImages.length > 0) {
-          loadImages();
-        }
         doScroll(body.scrollTop);
+        handleLazyImages();
       });
     </script>
   </body>
