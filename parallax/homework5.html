@@ -154,15 +154,15 @@
         <div class="parallax__layer parallax__layer--deep">
           <div class="full-screen"><img src="images/Frozen-Movie-Summer_Arendelle-HD-Wallpaper1.jpg"/></div>
           <div class="full-screen"><img src="images/Frozen-Movie-Ice-Castle-HD-Wallpaper1.jpg"/></div>
-          <div class="full-screen"><img src="images/ajax-loader.gif" class="lazy" lazy-src="images/YoungAE.jpg"/></div>
-          <div class="full-screen"><img src="images/ajax-loader.gif" class="lazy" lazy-src="images/Anna-Door.jpg"/></div>
-          <div class="full-screen"><img src="images/ajax-loader.gif" class="lazy" lazy-src="images/A-Sister-More-Like-Me-book-frozen-35706725-1212-779.jpg"/></div>
-          <div class="full-screen"><img src="images/ajax-loader.gif" class="lazy" lazy-src="images/Frozen-funeral.jpg"/></div>
+          <div class="full-screen"><img src="images/ajax-loader.gif" class="lazy1" lazy-src="images/YoungAE.jpg"/></div>
+          <div class="full-screen"><img src="images/ajax-loader.gif" class="lazy1" lazy-src="images/Anna-Door.jpg"/></div>
+          <div class="full-screen"><img src="images/ajax-loader.gif" class="lazy1" lazy-src="images/A-Sister-More-Like-Me-book-frozen-35706725-1212-779.jpg"/></div>
+          <div class="full-screen"><img src="images/ajax-loader.gif" class="lazy1" lazy-src="images/Frozen-funeral.jpg"/></div>
         </div>
       </div>
     </div>
     <script>
-      var body = document.querySelector('.parallax'), lazyImages = document.querySelectorAll('img.lazy');
+      var body = document.querySelector('.parallax'), lazyImages = {"lazy1":document.querySelectorAll('img.lazy1')};
         progress = 0;
       var lv0 = body.querySelector('.parallax__layer--deep'),
         lv1 = body.querySelector('.parallax__layer--back'),
@@ -176,11 +176,11 @@
         getProgress = function() {
           return parseInt(body.scrollTop * 100 / document.body.clientHeight);
         },
-        loadImages = function() {
-          var image, src, newImage;
-          if (lazyImages.length === 0) { return; }
-          for (var i = 0; i < lazyImages.length ; i++) {
-            image = lazyImages[i];
+        loadImages = function(group) {
+          var image, src, newImage, imageGroup = lazyImages[group];
+          if (!imageGroup) { return;}
+          for (var i = 0; i < imageGroup.length ; i++) {
+            image = imageGroup[i];
             newImage = new Image();
             src = image.getAttribute('lazy-src');
             newImage.onload = (function () {
@@ -195,12 +195,12 @@
             })();
             newImage.src = src;
           }
-        lazyImages = [];
+        delete lazyImages[group];
         };
       body.addEventListener('scroll', function (e) {
         progress = getProgress();
-        if (progress >= 60 && lazyImages.length > 0) {
-          loadImages();
+        if (progress >= 60 && lazyImages['lazy1']) {
+          loadImages('lazy1');
         }
         doScroll(body.scrollTop);
       });
