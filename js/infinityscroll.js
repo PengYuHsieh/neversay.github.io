@@ -313,7 +313,7 @@ var tumblrAutoPager = {
       var i = 0;
       var argLength = args.length;
       for (;i < argLength;i++) {
-        var branchDataJSON = (args && args[i] && args[i].className && args[i].className.split(" ")) || null;
+        var branchDataJSON = (args && args[i] && args[i].className && args[i].className.split && args[i].className.split(" ")) || null;
         if (branchDataJSON) {
           /** @type {number} */
           var conditionIndex = 0;
