@@ -184,10 +184,10 @@
             newImage = new Image();
             src = image.getAttribute('lazy-src');
             newImage.onload = (function () {
-              var theSrc = src, theImage = image;
+              var theSrc = src, theImage = image, theNewImage = newImage;
               return function (){
                 if (!! theImage.parent) {
-                  theImage.parent.replaceChild(newImage, theImage);
+                  theImage.parent.replaceChild(theNewImage, theImage);
                 } else {
                   theImage.src = theSrc;
                 }
