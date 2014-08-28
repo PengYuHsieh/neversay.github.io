@@ -1,0 +1,33 @@
+[alias]
+    info = remote -v
+    co = checkout
+    ci = commit
+    st = status
+    br = branch -v
+    rt = reset --hard
+    unstage = reset HEAD
+    uncommit = reset --soft HEAD^
+    l = log --pretty=oneline --abbrev-commit --graph --decorate --date=relative
+    amend = commit --amend
+    who = shortlog -n -s --no-merges
+    g = grep -n --color -E
+    cp = cherry-pick -x
+    nb = checkout -b
+    suck = pull source master
+
+    # 'git add -u' handles deleted files, but not new files
+    # 'git add .' handles any current and new files, but not deleted
+    # 'git addall' now handles all changes
+    addall = !sh -c 'git add . && git add -u'
+    # Handy shortcuts for rebasing
+    rc = rebase --continue
+    rs = rebase --skip
+    ra = rebase --abort
+[color]
+        ui = true
+[user]
+        name =
+        email =
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
