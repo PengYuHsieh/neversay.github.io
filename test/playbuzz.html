@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Playbuzz Widget</title>
+    </head>
+    <body>
+        <script type="text/javascript" src="http://cdn.playbuzz.com/widget/widget.js"></script>
+        <div class="pb_recommendations" data-key="Default" data-provider="playbuzz" data-view="large_images"
+            data-links="https://celebrity.yahoo.com/playbuzz/" data-num-items="4" data-tags="All"
+            data-nostyle="false" data-embed-by="427be333-3926-4661-9b98-8deeea878b2f"></div>
+        <script>
+          var prevHeight = 0,
+              setHeight = function () {
+                  var height = document.body.scrollHeight;
+                  if (prevHeight !== height) {
+                      prevHeight = height;
+                      top.postMessage('playbuzz-widget:height:' + height , '*');
+                  }
+              };
+          if (top && top.postMessage) {
+              setInterval(setHeight, 500);
+          }
+        </script>
+    </body>
+</html>
