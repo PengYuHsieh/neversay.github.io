@@ -32,11 +32,21 @@
                       prevHeight = height;
                       top.postMessage('playbuzz-widget:height:' + height , '*');
                   }
+              },
+              linkChanged = false,
+              checkLink = function(){
+                  if (linkChanged){return;}
+                  var links = document.getElementsByTagName('a');
+                  if (links.length == 0){return;}
+                  linkChanged = true;
+                  for (var i = 0; i < links.length; i++) {
+                      links[i].target = '_top';
+                  }
               };
           if (top && top.postMessage) {
               setInterval(setHeight, 500);
           }
         </script>
-        <script type="text/javascript" src="http://cdn.playbuzz.com/widget/widget.js"></script>
+        <script type="text/javascript" src="//cdn.playbuzz.com/widget/widget.js"></script>
     </body>
 </html>
