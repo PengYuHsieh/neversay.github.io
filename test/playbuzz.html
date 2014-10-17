@@ -33,16 +33,17 @@
                       top.postMessage('playbuzz-widget:height:' + height , '*');
                   }
               },
-              linkChanged = false,
-              checkLink = function(){
-                  if (linkChanged){return;}
+              checkLinks = function(){
                   var links = document.getElementsByTagName('a');
                   if (links.length == 0){return;}
-                  linkChanged = true;
                   for (var i = 0; i < links.length; i++) {
                       links[i].target = '_top';
                   }
-              };
+                  clearInterval(checkLinksInterval);
+              },
+              checkLinksInterval;
+          checkLinksInterval = setInterval(checkLinks, 500);
+
           if (top && top.postMessage) {
               setInterval(setHeight, 500);
           }
