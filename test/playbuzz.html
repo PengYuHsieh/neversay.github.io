@@ -4,11 +4,27 @@
         <title>Playbuzz Widget</title>
     </head>
     <body>
-        <script type="text/javascript" src="http://cdn.playbuzz.com/widget/widget.js"></script>
         <div class="pb_recommendations" data-key="Default" data-provider="playbuzz" data-view="large_images"
             data-links="https://celebrity.yahoo.com/playbuzz/" data-num-items="4" data-tags="All"
             data-nostyle="false" data-embed-by="427be333-3926-4661-9b98-8deeea878b2f"></div>
         <script>
+          var query = location.href.split('?')[1], elm = document.getElementsByClassName('pb_recommendations')[0];
+
+          if (query && elm) {
+              var params = query.split('&'), kvs = {}, keys = [], kv, i, elm, attr;
+              for(i = 0; i < params.length; i++) {
+                  kv = params[i].split('=');
+                  keys.push(kv[0]);
+                  kvs[kv[0]] = kv[1];
+              }
+              for(i = 0; i < keys.length; i++) {
+                  attr = elm.attributes[keys[i]]
+                  if (attr) {
+                      attr.value = kvs[keys[i]];
+                  }
+              }
+          }
+
           var prevHeight = 0,
               setHeight = function () {
                   var height = document.body.scrollHeight;
@@ -21,5 +37,6 @@
               setInterval(setHeight, 500);
           }
         </script>
+        <script type="text/javascript" src="http://cdn.playbuzz.com/widget/widget.js"></script>
     </body>
 </html>
