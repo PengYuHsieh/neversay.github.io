@@ -6,8 +6,12 @@
     <body>
         <div class="pb_recommendations" data-key="Default" data-provider="playbuzz" data-view="large_images"
             data-links="https://celebrity.yahoo.com/playbuzz/" data-num-items="4" data-tags="All"
-            data-nostyle="false" data-embed-by="427be333-3926-4661-9b98-8deeea878b2f"></div>
+            data-nostyle="false" data-embed-by="427be333-3926-4661-9b98-8deeea878b2f" data-analytics-callback="anaCallback"></div>
         <script>
+          var anaCallback = function(e) {
+              console.log(e);
+          } 
+        
           var query = location.href.split('?')[1], elm = document.getElementsByClassName('pb_recommendations')[0];
 
           if (query && elm) {
